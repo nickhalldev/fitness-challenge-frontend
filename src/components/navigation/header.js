@@ -1,4 +1,9 @@
 import React from "react";
+import { withRouter } from "react-router-dom"
+import Sidenav from "../modals/sidenav"
+import Select from 'react-select'
+
+import { NavLink } from "react-router-dom";
 
 
 class Header extends React.Component {
@@ -6,24 +11,49 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
+      currentPage: window.location.pathname.slice(1)
     };
+    console.log('this.state - ',this.state)
+    this.handleActivity = this.handleActivity.bind(this);
+    console.log('props -',this.props)
   }
 
+  componentDidMount(){
+    console.log('this.state - ',this.state)
+  }
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
+  openSidenav = e => {
+     document.getElementById("sideNav").style.width = "20%";
+    }
+
+  closeSidenav() {
+    document.getElementById("sideNav").style.width = "0%";
+  }
+
+  handleActivity(e) {
+      this.props.history.push(e.value)
+  }
+
 
 
   render() {
     return (
       <div className="header">
-      <img alt="" src="https://www.fillmurray.com/200/300"></img>
+        <i className="fas fa-bars sidenav-hamburger" onClick={this.openSidenav}></i>
+        <i className="fas fa-plus add-activity" onClick={this.openAddActivity}></i>
+          <Select id="activity-dropdown" value={this.state.currentPage?this.state.currentPage:"Any"} selected={this.state.currentPage} options={[
+          { value: '/activity', label: 'Add Activity' },
+          { value: '/weight', label: 'Add Weight' },
+
+        ]} onChange={this.handleActivity} style={{width: '90px'}} />
 
 
-
+        <Sidenav close={this.closeSidenav}/>
 
       </div>
     );

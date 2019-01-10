@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import Register from './components/register'
 import Login from './components/login'
-// import Profile from './components/profile'
+import Header from './components/navigation/header'
+import Profile from './components/profile'
 import Home from './components/home'
 import { Route } from "react-router-dom";
+import { connect } from 'react-redux'
+import * as actions from "./actions/index"
+import { withRouter } from "react-router-dom";
+
 
 class App extends Component {
 
@@ -18,21 +23,22 @@ class App extends Component {
   }
 
   authCheck = () => {
+    console.log('localStorage',localStorage)
     if (localStorage.token) {
-      // this.props.fetchingUser()
-      // this.props.fetchingUsers()
+      this.props.fetchingUser()
+      this.props.fetchingUsers()
     } else {
       // this.backToLogin()
     }
   }
 
-  // signup = () => {
-  //   this.props.history.push("/signup");
-  // };
-  //
-  // backToLogin = () => {
-  //   this.props.history.push("/login");
-  // };
+  signup = () => {
+    this.props.history.push("/signup");
+  };
+
+  backToLogin = () => {
+    this.props.history.push("/login");
+  };
 
   render() {
     // console.log("APP PROPS", this.props)
@@ -45,9 +51,13 @@ class App extends Component {
     //       />
     //     )
     //   }
+    // <Header />
     return (
 
-      <div className = "container-class">
+
+      <div>
+
+
 
       <
       Route exact path = "/register"
@@ -59,6 +69,12 @@ class App extends Component {
       Route exact path = "/"
       component = {
         Home
+      }
+      />
+      <
+      Route exact path = "/profile"
+      component = {
+        Profile
       }
       />
       <
@@ -79,4 +95,11 @@ class App extends Component {
 
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    users: state.users.users,
+    current_user: state.users
+  }
+}
+
+export default withRouter(connect(mapStateToProps, actions)(App));
