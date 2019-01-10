@@ -20,7 +20,7 @@ class Privacy extends React.Component {
   render() {
     return (
       <div id="privacy" className="overlay">
-          <a href="javascript:void(0)" className="closebtn" onClick={this.props.close}>&times;</a>
+          <a className="closebtn" onClick={this.props.close}>&times;</a>
           <div className="overlay-content">
             <div className="modal-container privacy">
             <span>Last Updated January 4, 2019</span>

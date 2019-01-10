@@ -16,10 +16,10 @@ class Terms extends React.Component {
   };
 
   keyPress = e => {
-    console.log('e.key - ',e.key)
+    // console.log('e.key - ',e.key)
     if(e.key === "Escape" ) {
         // write your logic here.
-        console.log('here we gooooo')
+        // console.log('here we gooooo')
     }
 }
 
@@ -31,7 +31,7 @@ class Terms extends React.Component {
   render() {
     return (
       <div id="terms" className="overlay">
-          <a href="javascript:void(0)" className="closebtn" onClick={this.props.close}>&times;</a>
+          <a className="closebtn" onClick={this.props.close}>&times;</a>
           <div className="overlay-content">
           <div className="modal-container terms">
             <span>Last Updated January 4, 2019</span>

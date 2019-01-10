@@ -5,7 +5,6 @@ class SimpleInput extends React.Component {
   constructor(props) {
     super(props);
     this.changeValue = this.changeValue.bind(this);
-    console.log('props - ', props)
   }
 
   changeValue(event) {

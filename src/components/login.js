@@ -26,11 +26,19 @@ class Login extends React.Component {
     });
   };
 
+  pushToProfile(){
+    this.props.history.push('/profile')
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.canSubmit === true) {
-      this.props.loginUser(this.state, this.props.history)
+      this.props.loginUser(this.state, this.props.history).then(() => {
       this.props.history.push('/profile')
+      // this.pushToProfile()
+      console.log('in here')
+    })
+
   } else {
       $(".validation-error-hidden").removeClass("validation-error-hidden")
     }

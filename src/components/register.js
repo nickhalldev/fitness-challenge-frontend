@@ -3,6 +3,9 @@ import SimpleInput from "./functionalComponents/input.js";
 import $ from 'jquery'
 import Formsy from 'formsy-react'
 import { NavLink } from "react-router-dom";
+import * as actions from "../actions/index"
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux'
 
 const url = "http://localhost:3001/api/v1/";
 
@@ -15,8 +18,7 @@ class Register extends React.Component {
       firstname: '',
       lastname: '',
       email: '',
-      address: '',
-      phone: '',
+      telephone: '',
       canSubmit: false
     };
   }
@@ -164,4 +166,10 @@ class Register extends React.Component {
   }
 }
 
-export default Register
+const mapStateToProps = state => {
+    return {
+      current_user: state.users.current_user
+    }
+  }
+
+export default withRouter(connect(mapStateToProps, actions)(Register));

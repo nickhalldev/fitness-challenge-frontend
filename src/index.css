@@ -415,3 +415,11 @@ a:-webkit-any-link {
 #activity-dropdown .css-vj8t7z {
   background-color: rgba(217,220,225,0.0) ;
 }
+
+.closebtn {
+  cursor: pointer;
+}
+
+#terms .closebtn:hover, #privacy .closebtn:hover  {
+  color: white ;
+}

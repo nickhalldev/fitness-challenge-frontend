@@ -12,6 +12,7 @@ export function loginUser(user_params, history) {
       } else {
         localStorage.setItem("token", data["jwt"]);
         dispatch(fetchingAllUserData(data.user.id))
+        return null
       }
     })
   }
@@ -40,7 +41,7 @@ export function fetchingAllUserData(user_id){
         console.log('error');
         return null
       } else {
-        console.log('data - all user data', data)
+        // console.log('data - all user data', data)
         dispatch({ type: SET_USER, payload: data })
       }
     })
@@ -56,7 +57,7 @@ export function fetchingUsers(){
         return null
       }
       else {
-        console.log('data - fetching users', data)
+        // console.log('data - fetching users', data)
         dispatch({ type: SET_USERS, payload: data})
       }
     })

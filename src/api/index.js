@@ -1,7 +1,7 @@
 const url = "http://localhost:3001/api/v1/";
 
-export function login(user_params){
-  console.log('user_params',user_params)
+export async function login(user_params){
+  // console.log('user_params',user_params)
   return fetch(`${url}auth`, {
     headers: {
       Accept: "application/json",

@@ -23,13 +23,10 @@ class App extends Component {
   }
 
   authCheck = () => {
-    console.log('localStorage',localStorage)
     if (localStorage.token) {
       this.props.fetchingUser()
       this.props.fetchingUsers()
-    } else {
-      // this.backToLogin()
-    }
+    } 
   }
 
   signup = () => {

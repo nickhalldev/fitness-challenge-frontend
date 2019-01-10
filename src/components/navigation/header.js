@@ -13,14 +13,9 @@ class Header extends React.Component {
     this.state = {
       currentPage: window.location.pathname.slice(1)
     };
-    console.log('this.state - ',this.state)
     this.handleActivity = this.handleActivity.bind(this);
-    console.log('props -',this.props)
   }
 
-  componentDidMount(){
-    console.log('this.state - ',this.state)
-  }
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value

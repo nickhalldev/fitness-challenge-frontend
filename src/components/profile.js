@@ -2,6 +2,7 @@ import React from "react";
 import * as actions from "../actions/index"
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
+import Header from './navigation/header'
 
 
 class Profile extends React.Component {
@@ -19,18 +20,31 @@ class Profile extends React.Component {
   };
 
   componentDidMount(){
-    console.log('users - ',this.props.users)
-    console.log('users - ',this.props.current_user)
+    // console.log('users - ',this.props.users)
+    // console.log('users - ',this.props.current_user)
+
+      this.authCheck()
+
+
+
+  }
+
+  authCheck = () => {
+    if (localStorage.token) {
+      // this.props.fetchingUser()
+      // this.props.fetchingUsers()
+      console.log('I have a token')
+    } else {
+      this.props.history.push('/login')
+      console.log('I dont have a token')
+    }
   }
 
   displayUser = () => {
-    if (this.props.current_user){
-      console.log(this.props.current_user)
-    }
-    if (this.props.current_user.current_user) {
-      return ( <div>
+    if (this.props.current_user) {
+      return ( <div >
 
-        <h3>Hey {this.props.current_user.current_user.firstname} {this.props.current_user.current_user.lastname}! Welcome back to Cottage, where you can buy or sell home baked meals to other locals.</h3>
+        <h3>Hey {this.props.current_user.firstname} {this.props.current_user.lastname}! Welcome back to Cottage, where you can buy or sell home baked meals to other locals.</h3>
 
         <h5>Please use the above navigation to plan your next sale or purchase. </h5>
 
@@ -44,7 +58,8 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container-class">
+        <Header />
 
       {this.displayUser()}
 
