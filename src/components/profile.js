@@ -23,7 +23,7 @@ class Profile extends React.Component {
     // console.log('users - ',this.props.users)
     // console.log('users - ',this.props.current_user)
 
-      this.authCheck()
+      // this.authCheck()
 
 
 

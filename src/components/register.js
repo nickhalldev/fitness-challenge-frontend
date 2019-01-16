@@ -61,9 +61,10 @@ class Register extends React.Component {
       headers,
       body: JSON.stringify(body)
     }).then(res => {
+      this.props.loginUser(this.state, this.props.history)
       // console.log('this is what response is for signin',res)
       this.props.fetchingAllUserData(this.props.user_id)
-      this.props.history.push('/login')
+      this.props.history.push('/profile')
     })
   } else {
     $(".validation-error-hidden").removeClass("validation-error-hidden")

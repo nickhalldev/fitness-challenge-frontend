@@ -26,7 +26,7 @@ class App extends Component {
     if (localStorage.token) {
       this.props.fetchingUser()
       this.props.fetchingUsers()
-    } 
+    }
   }
 
   signup = () => {
@@ -80,6 +80,7 @@ class App extends Component {
         () => < Login / >
       }
       />
+    
 
 
 

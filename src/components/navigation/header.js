@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom"
 import Sidenav from "../modals/sidenav"
+import AddChallenge from "../modals/addChallenge"
 import Select from 'react-select'
 
 import { NavLink } from "react-router-dom";
@@ -26,12 +27,25 @@ class Header extends React.Component {
      document.getElementById("sideNav").style.width = "20%";
     }
 
+  openAddChallenge = e => {
+     document.getElementById("add-challenge").style.width = "400px";
+    }
+
   closeSidenav() {
     document.getElementById("sideNav").style.width = "0%";
   }
 
+  closeAddChallenge() {
+    document.getElementById("add-challenge").style.width = "0%";
+  }
+
   handleActivity(e) {
-      this.props.history.push(e.value)
+      if (e.value === '/challenge'){
+        this.openAddChallenge()
+      } else {
+        this.props.history.push(e.value)
+      }
+
   }
 
 
@@ -44,11 +58,13 @@ class Header extends React.Component {
           <Select id="activity-dropdown" value={this.state.currentPage?this.state.currentPage:"Any"} selected={this.state.currentPage} options={[
           { value: '/activity', label: 'Add Activity' },
           { value: '/weight', label: 'Add Weight' },
+          { value: '/challenge', label: 'Create Challenge' }
 
         ]} onChange={this.handleActivity} style={{width: '90px'}} />
 
 
         <Sidenav close={this.closeSidenav}/>
+        <AddChallenge close={this.closeAddChallenge}/>
 
       </div>
     );
