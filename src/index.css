@@ -428,16 +428,23 @@ a:-webkit-any-link {
   margin: 0px 20px 0px 20px;
 }
 
-#add-challenge {
+#add-challenge  {
   height: 500px;
   position: sticky;
   margin-left: auto;
   margin-right: auto;
 }
-#add-challenge .closebtn{
+
+#add-weight {
+  height: 200px;
+  position: absolute;
+  margin-left: 30%;
+  margin-top: 10%;
+}
+#add-challenge .closebtn, #add-weight .closebtn{
   font-size:18px;
   color: white;
 }
-#add-challenge .overlay-content {
+#add-challenge .overlay-content, #add-weight .overlay-content {
   margin-top: 0px;
 }

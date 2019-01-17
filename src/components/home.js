@@ -41,7 +41,6 @@ class Home extends React.Component {
     document.getElementById("sideNav").style.width = "0%";
   }
   openTerms = e => {
-     console.log('e.target.id',e.target.id)
      document.getElementById("terms").style.width = "100%";
     }
 
@@ -49,7 +48,6 @@ class Home extends React.Component {
     document.getElementById("terms").style.width = "0%";
   }
   openPrivacy = e => {
-     console.log('e.target.id',e.target.id)
      document.getElementById("privacy").style.width = "100%";
     }
 
@@ -62,7 +60,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="container-class">
-<Header />
+        <Header />
         <div className="center">
           <h1>
             Friendly Fitness Frenzy

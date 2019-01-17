@@ -16,11 +16,8 @@ class AddChallenge extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name:'',
-      startDate: "",
-      endDate: '',
-      closeDate:'',
-      participants:[],
+      weight:0,
+      date: Date.now(),
       canSubmit: false
     };
   }
@@ -66,29 +63,29 @@ class AddChallenge extends React.Component {
 
   render() {
     return (
-      <div id="add-challenge" className="overlay">
+      <div id="add-weight" className="overlay">
           <a className="closebtn" onClick={this.props.close}>&times;</a>
           <div className="overlay-content">
             <div className="modal-container add-challenge">
-            <Formsy id="create-challenge" onValid={this.enableSubmit} onInvalid={this.disableSubmit}>
+            <Formsy id="create-weight" onValid={this.enableSubmit} onInvalid={this.disableSubmit}>
 
 
               <SimpleInput
-                name="name"
+                name="weight"
                 onChange={this.handleChange}
-                label="Name"
-                type="text"
-                placeholder="Name"
+                label="Weight"
+                type="number"
+                placeholder='0'
 
               />
 
 
             <SimpleInput
-                  name="startDate"
+                  name="Date"
                   onChange={this.handleChange}
                   label="Start Date"
-                  type="text"
-                  placeholder="Start Date"
+                  type="date"
+                  placeholder={this.state.date}
                   validationErrors={{
                     isDefaultRequiredValue: 'Start Date is required'
                   }}
@@ -96,25 +93,7 @@ class AddChallenge extends React.Component {
                 />
 
 
-              <SimpleInput
-                  name="endDate"
-                  onChange={this.handleChange}
-                  label="End Date"
-                  placeholder="End Date"
-                  validationErrors={{
-                    isDefaultRequiredValue: 'End date is required'
-                  }}
-                  required
-                />
 
-
-              <SimpleInput
-                  name="closeDate"
-                  onChange={this.handleChange}
-                  label="closeDate"
-                  placeholder="Close Date"
-
-                />
 
 
               <button className='btn btn-submit'onClick={this.handleSubmit}>Submit</button>

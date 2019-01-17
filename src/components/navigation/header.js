@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom"
 import Sidenav from "../modals/sidenav"
 import AddChallenge from "../modals/addChallenge"
+import AddWeight from "../modals/addWeight"
 import Select from 'react-select'
 
 import { NavLink } from "react-router-dom";
@@ -30,6 +31,9 @@ class Header extends React.Component {
   openAddChallenge = e => {
      document.getElementById("add-challenge").style.width = "400px";
     }
+  openAddWeight = e => {
+     document.getElementById("add-weight").style.width = "400px";
+    }
 
   closeSidenav() {
     document.getElementById("sideNav").style.width = "0%";
@@ -38,11 +42,16 @@ class Header extends React.Component {
   closeAddChallenge() {
     document.getElementById("add-challenge").style.width = "0%";
   }
+  closeAddWeight() {
+    document.getElementById("add-weight").style.width = "0%";
+  }
 
   handleActivity(e) {
       if (e.value === '/challenge'){
         this.openAddChallenge()
-      } else {
+      } else if(e.value === '/weight') {
+        this.openAddWeight()
+      } else{
         this.props.history.push(e.value)
       }
 
@@ -65,6 +74,7 @@ class Header extends React.Component {
 
         <Sidenav close={this.closeSidenav}/>
         <AddChallenge close={this.closeAddChallenge}/>
+        <AddWeight close={this.closeAddWeight}/>
 
       </div>
     );
