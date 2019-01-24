@@ -2,7 +2,8 @@ import {
   SET_USER,
   LOGOUT,
   SET_USERS,
-  SET_USERS_FOR_TRANSACTIONS,
+  SET_WEIGHTS,
+  SET_EXERCISES
 } from "../actions/types"
 
 const defaultState = {
@@ -10,7 +11,8 @@ const defaultState = {
     current_user: {}
   },
   users: {},
-  transaction_users: {}
+  weights: {},
+  exercises: {}
 }
 
 export default function users(state = defaultState, action) {
@@ -33,10 +35,18 @@ export default function users(state = defaultState, action) {
         users: action.payload
       }
 
-    case SET_USERS_FOR_TRANSACTIONS:
+
+
+    case SET_WEIGHTS:
       return {
         ...state,
-        transaction_users: action.payload
+        weights: action.payload
+      }
+
+    case SET_EXERCISES:
+      return {
+        ...state,
+        exercises: action.payload
       }
 
     default:

@@ -220,16 +220,17 @@ border-color: #2d4373;
   margin-top: 30px;
 }
 
-.overlay a {
+.overlay > div {
   padding: 8px;
   text-decoration: none;
   font-size: 36px;
   color: #818181;
   display: block;
   transition: 0.3s;
+  /* cursor: pointer; */
 }
 
-.overlay a:hover, .overlay a:focus {
+.overlay > div:hover, .overlay > div:focus {
   color: #f1f1f1;
 }
 
@@ -241,7 +242,7 @@ border-color: #2d4373;
 }
 
 @media screen and (max-height: 450px) {
-  .overlay a {font-size: 20px}
+  .overlay div {font-size: 20px}
   .overlay .closebtn {
   font-size: 40px;
   top: 15px;
@@ -435,16 +436,56 @@ a:-webkit-any-link {
   margin-right: auto;
 }
 
-#add-weight {
-  height: 200px;
+#add-weight, #add-exercise {
+  height: 500px;
   position: absolute;
   margin-left: 30%;
   margin-top: 10%;
 }
-#add-challenge .closebtn, #add-weight .closebtn{
+#add-challenge .closebtn, #add-weight .closebtn,#add-exercise .closebtn{
   font-size:18px;
   color: white;
 }
-#add-challenge .overlay-content, #add-weight .overlay-content {
+#add-challenge .overlay-content, #add-weight .overlay-content, #add-exercise .overlay-content {
   margin-top: 0px;
+}
+
+.add-challenge-input, .add-exercise-input {
+  height:30px;
+  width: 215px;
+  font-size: 24px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+
+}
+
+#create-challenge div {
+  line-height: 1;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
+  padding: 0px 5px !important;
+  height: 25px;
+}
+
+.react-datepicker__input-container {
+  font-size: 14px;
+
+}
+
+.react-datepicker__input-container > input {
+  width: 215px;
+  height:30px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.react-datepicker__time-container, .react-datepicker__time-box {
+  width: 100px !important;
+
+}
+
+.weight-chart{
+  max-height:500px;
+  max-width:500px;
 }

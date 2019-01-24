@@ -1,4 +1,7 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../actions/index"
+import { connect } from 'react-redux'
 // import { Modal, Button } from 'react-bootstrap';
 
 
@@ -7,6 +10,8 @@ class Sidenav extends React.Component {
     super(props);
     this.state = {
     };
+    console.log('this.props', this.props)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleChange = e => {
@@ -15,17 +20,36 @@ class Sidenav extends React.Component {
     });
   };
 
+  handleClick(e) {
+    console.log('this', this)
+    console.log('e - ',e.target.id)
+    if (e.target.id === 'logout'){
+      this.props.logout()
+      this.props.history.push('/')
+    }
+    else {
+    this.props.history.push(e.target.id)
+    }
+
+      //   this.openAddChallenge()
+      // } else{
+      //   this.props.history.push(e.value)
+      // }
+
+  }
+
+
 
 
   render() {
     return (
       <div id="sideNav" className="overlay">
-          <a href="javascript:void(0)" className="closebtn" onClick={this.props.close}>&times;</a>
+          <div className="closebtn" onClick={this.props.close}>&times;</div>
           <div className="overlay-content">
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
+            <div onClick={this.handleClick} id="/profile">Profile</div>
+            <div onClick={this.handleClick} id="logout">Logout</div>
+
+
             </div>
       </div>
 
@@ -37,4 +61,9 @@ class Sidenav extends React.Component {
 
 }
 
-export default Sidenav
+const mapStateToProps = state => {
+  return {
+    current_user: state.users.current_user
+  }
+}
+export default withRouter(connect(mapStateToProps,actions)(Sidenav))

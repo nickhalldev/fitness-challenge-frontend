@@ -7,6 +7,7 @@ class SimpleInput extends React.Component {
     this.changeValue = this.changeValue.bind(this);
   }
 
+
   changeValue(event) {
     this.props.setValue(event.currentTarget.value);
     this.props.onChange(event);
@@ -28,6 +29,7 @@ class SimpleInput extends React.Component {
           value={this.props.getValue() || ''}
           placeholder={this.props.placeholder}
           className={this.props.className}
+          autoComplete="off"
         />
         <span className="validation-error validation-error-hidden">{errorMessage}</span>
       </div>

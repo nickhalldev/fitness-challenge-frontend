@@ -21,6 +21,7 @@ class Login extends React.Component {
   }
 
   handleChange = e => {
+    $('#invalid-login').addClass("invisible")
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -33,13 +34,17 @@ class Login extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.canSubmit === true) {
-      this.props.loginUser(this.state, this.props.history).then(() => {
-      this.props.history.push('/profile')
-      // this.pushToProfile()
-      console.log('in here')
-    })
 
-  } else {
+      this.props.loginUser(this.state, this.props.history)
+      .then(res => {
+      if (res === 'bad'){
+        $('#invalid-login').removeClass("invisible")
+    } else {
+      this.pushToProfile()
+    }
+  })
+}
+  else {
       $(".validation-error-hidden").removeClass("validation-error-hidden")
     }
   };
@@ -57,6 +62,7 @@ class Login extends React.Component {
         <div className="padding-100">
           <div className="login-form">
         <h1>Log in</h1>
+        <span id="invalid-login" className="invisible validation-error">Username and password did not match</span>
         <Formsy id="login" onValid={this.enableSubmit} onInvalid={this.disableSubmit}>
 
           <SimpleInput

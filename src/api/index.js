@@ -1,7 +1,7 @@
 const url = "http://localhost:3001/api/v1/";
 
-export async function login(user_params){
-  // console.log('user_params',user_params)
+export function login(user_params){
+  
   return fetch(`${url}auth`, {
     headers: {
       Accept: "application/json",
@@ -30,9 +30,18 @@ export function fetchUsers(){
 
 }
 
+export function fetchExercises(){
+  return fetch(`${url}exercises`)
+  .then(res => res.json())
+
+}
+
 export function fetchUserData(user_id){
   return fetch(`${url}users/${user_id}`)
   .then(res => res.json())
+}
 
-
+export function fetchUserWeights(user_id){
+  return fetch(`${url}users/${user_id}/weights`)
+  .then(res => res.json())
 }

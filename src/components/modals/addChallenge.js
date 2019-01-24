@@ -1,7 +1,9 @@
 import React from "react";
 import $ from 'jquery'
 import Formsy from 'formsy-react'
+import moment from 'moment'
 import SimpleInput from "../functionalComponents/input.js";
+import SimpleDatepicker from "../functionalComponents/datepicker.js";
 
 import { withRouter } from "react-router-dom";
 import * as actions from "../../actions/index"
@@ -17,19 +19,38 @@ class AddChallenge extends React.Component {
     super(props);
     this.state = {
       name:'',
-      startDate: "",
-      endDate: '',
-      closeDate:'',
       participants:[],
-      canSubmit: false
+      canSubmit: false,
+      startDate: '',
+      endDate: '',
+      closeDate: ''
     };
   }
 
   handleChange = e => {
+
     this.setState({
       [e.target.name]: e.target.value
     });
   };
+
+  handleDateChange = (updatedState, date) =>{
+
+    if (updatedState === 'startDate' && this.state.endDate === ''  && this.state.closeDate === ''){
+      $("#endDate").value = moment(date).add(7, 'days')
+      console.log('end date',$("#endDate").value)
+      let date7 = moment(date).add(7, 'days')
+      console.log('date + 7',date7)
+      // console.log('date + 7',moment(date).add(7, 'days'))
+      console.log('date ',moment(date))
+    }
+    this.setState({
+      [updatedState]: date
+    });
+
+
+  }
+
   enableSubmit = () => {
     this.setState({ canSubmit: true });
   }
@@ -39,8 +60,11 @@ class AddChallenge extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    console.log('enable submit',this.state.canSubmit)
     console.log('this.props.current_user -' ,this.props.current_user.id)
-    if (this.state.canSubmit === true) {
+    if (this.state.startDate === '' || this.state.endDate == '' || this.state.closeDate == ''){
+      $(".date-validation").removeClass("validation-error-hidden")
+    } else if (this.state.canSubmit === true) {
     // const headers = {
     //   Accept: "application/json",
     //   "Content-Type": "application/json"
@@ -57,6 +81,7 @@ class AddChallenge extends React.Component {
     //   this.props.history.push('/profile')
     // })
   } else {
+    console.log('Am I in remove class')
     $(".validation-error-hidden").removeClass("validation-error-hidden")
   }
     ;
@@ -70,33 +95,44 @@ class AddChallenge extends React.Component {
           <a className="closebtn" onClick={this.props.close}>&times;</a>
           <div className="overlay-content">
             <div className="modal-container add-challenge">
+              <span className="validation-error validation-error-hidden date-validation">Need alllll the dates!</span>
             <Formsy id="create-challenge" onValid={this.enableSubmit} onInvalid={this.disableSubmit}>
 
 
               <SimpleInput
+
                 name="name"
                 onChange={this.handleChange}
                 label="Name"
                 type="text"
                 placeholder="Name"
+                validationErrors={{
+                  isDefaultRequiredValue: 'Name is required'
+                }}
+                className="add-challenge-input"
+                required
 
               />
 
 
-            <SimpleInput
+            <SimpleDatepicker
+
                   name="startDate"
                   onChange={this.handleChange}
                   label="Start Date"
-                  type="text"
                   placeholder="Start Date"
                   validationErrors={{
                     isDefaultRequiredValue: 'Start Date is required'
                   }}
                   required
+                  className="add-challenge-input"
+                  handleDateChange={this.handleDateChange}
+                  time="true"
                 />
 
 
-              <SimpleInput
+              <SimpleDatepicker
+
                   name="endDate"
                   onChange={this.handleChange}
                   label="End Date"
@@ -105,15 +141,23 @@ class AddChallenge extends React.Component {
                     isDefaultRequiredValue: 'End date is required'
                   }}
                   required
+                  className="add-challenge-input"
+                  handleDateChange={this.handleDateChange}
+                  future="true"
+                  time="true"
                 />
 
 
-              <SimpleInput
+              <SimpleDatepicker
+
                   name="closeDate"
                   onChange={this.handleChange}
                   label="closeDate"
                   placeholder="Close Date"
-
+                  className="add-challenge-input"
+                  handleDateChange={this.handleDateChange}
+                  future="true"
+                  time="true"
                 />
 
 

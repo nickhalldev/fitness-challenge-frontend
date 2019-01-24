@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 
 const url = "http://localhost:3001/api/v1/";
 
-class AddWeight extends React.Component {
+class AddExercise extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +27,29 @@ class AddWeight extends React.Component {
       [updatedState]: date
     });
 
+  }
+
+  exerciseChoices = () => {
+    if (Object.entries(this.props.exercises).length !== 0){
+      let options = '<select>'
+      this.props.exercises.map((e) => {
+        console.log('e.name ', e.name)
+        options += "<option value="
+        options += e.name
+        options += ">"
+        options += e.name
+        options += "</option>"
+      })
+      options += "</select>"
+      console.log('options', options)
+
+      return (
+        options
+      // )
+
+
+      )
+    }
   }
 
 
@@ -45,24 +68,24 @@ class AddWeight extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     if (this.state.canSubmit === true) {
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    };
-    const body = this.state;
-    fetch(`${url}/users/${this.props.current_user.id}/weights`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body)
-    }).then(res => {
-      // this.props.history.push('/profile')
-      this.setState({
-        canSubmit: false,
-        weight: 0,
-        date: '' 
-      });
+    // const headers = {
+    //   Accept: "application/json",
+    //   "Content-Type": "application/json"
+    // };
+    // const body = this.state;
+    // fetch(`${url}/users/${this.props.current_user.id}/weights`, {
+    //   method: "POST",
+    //   headers,
+    //   body: JSON.stringify(body)
+    // }).then(res => {
+    //   // this.props.history.push('/profile')
+    //   this.setState({
+    //     canSubmit: false,
+    //     weight: 0,
+    //     date: ''
+    //   });
       this.props.close()
-    })
+    // })
   } else {
     $(".validation-error-hidden").removeClass("validation-error-hidden")
   }
@@ -73,33 +96,28 @@ class AddWeight extends React.Component {
 
   render() {
     return (
-      <div id="add-weight" className="overlay">
+      <div id="add-exercise" className="overlay">
           <a className="closebtn" onClick={this.props.close}>&times;</a>
           <div className="overlay-content">
-            <div className="modal-container add-challenge">
-            <Formsy id="create-weight" onValid={this.enableSubmit} onInvalid={this.disableSubmit}>
+            <div className="modal-container add-exercise">
+            <Formsy id="create-exercise" onValid={this.enableSubmit} onInvalid={this.disableSubmit}>
 
 
-              <SimpleInput
-                name="weight"
-                onChange={this.handleChange}
-                label="Weight"
-                type="number"
-                placeholder='Weight'
 
-              />
-
+            {this.exerciseChoices()}
 
             <SimpleDatepicker
                   name="date"
                   onChange={this.handleChange}
                   label="date"
                   placeholder="Date"
+                  className="add-exercise-input"
                   validationErrors={{
                     isDefaultRequiredValue: 'Date is required'
                   }}
                   handleDateChange={this.handleDateChange}
-                  time="false"
+                  time="true"
+                  future="false"
                   required
                 />
 
@@ -121,9 +139,11 @@ class AddWeight extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log('state',state)
   return {
-    current_user: state.users.current_user
+    current_user: state.users.current_user,
+    exercises: state.users.exercises
   }
 }
 
-export default withRouter(connect(mapStateToProps, actions)(AddWeight))
+export default withRouter(connect(mapStateToProps, actions)(AddExercise))
